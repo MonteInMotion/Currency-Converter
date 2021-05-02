@@ -1,43 +1,59 @@
-let form = document.querySelector(".js-form");
-let formAmount = document.querySelector(".js-form__amount");
-let formCurrency = document.querySelector(".js-form__currency");
-let buttonSubmit = document.querySelector(".js-form__buttonSubmit");
-let buttonReset = document.querySelector(".js-form__buttonReset");
-let formResult = document.querySelector(".js-from__result");
+{
+    const calculatorResult = (amountPLN, currency) => {
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+        const EUR = 4.56;
+        const USD = 3.76;
+        const GBP = 5.23;
 
-    let EUR = 4.56;
-    let USD = 3.76;
-    let GBP = 5.23;
+        switch (currency) {
+            case "EUR":
+                return (amountPLN / EUR);
 
-    let amountPLN = formAmount.value;
-    let currency = formCurrency.value;
-    let result;
+            case "USD":
+                return (amountPLN / USD);
 
-    switch (currency) {
-        case "EUR":
-            result = (amountPLN / EUR);
-            currencyName = "EUR";
-            break;
+            case "GBP":
+                return (amountPLN / GBP);
+        }
+    };
 
-        case "USD":
-            result = (amountPLN / USD);
-            currencyName = "USD";
-            break;
+    const updateResultText = (result, currencyName) => {
+        const formResult = document.querySelector(".js-form__result");
+        formResult.innerText = `${result.toFixed(2)} ${currencyName}.`;
+    };
 
-        case "GBP":
-            result = (amountPLN / GBP);
-            currencyName = "GBP";
-            break;
-    }
+    const onFormSubmit = (event) => {
+        event.preventDefault();
 
-    formResult.innerText = `${result.toFixed(2)} ${currencyName}.`;
-});
+        const formAmount = document.querySelector(".js-form__amount");
+        const formCurrency = document.querySelector(".js-form__currency");
 
-form.addEventListener("reset", () => {
+        const amountPLN = formAmount.value;
+        const currency = formCurrency.value;
+        const currencyName = formCurrency.value
 
-    console.log('Formularz został zresetowany');
+        const result = calculatorResult(amountPLN, currency);
+        updateResultText(result, currencyName);
+    };
 
-});
+    const init = () => {
+        const form = document.querySelector(".js-form");
+
+        form.addEventListener("submit", onFormSubmit);
+    };
+
+    init();
+
+    //Function reset is not working for the js-form__result class.
+
+    const resetForm = () => {
+        const resetResult = "."
+
+        form.addEventListener("reset", (updateResultText) => {
+            updateResultText.innerText = `${resetResult}`;
+            console.log('Formularz został zresetowany');
+        });
+
+        resetForm();
+    };
+}
