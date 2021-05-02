@@ -1,0 +1,12 @@
+html {
+    box-sizing: border-box;
+}
+
+*, ::after, ::before {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Imbue', serif;
+    background-color: #ffe137;
+}
