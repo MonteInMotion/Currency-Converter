@@ -9,4 +9,10 @@ html {
 body {
     font-family: 'Imbue', serif;
     background-color: #ffe137;
+    background-image: url("../images/backgroundImage1.png");
+    background-size: 300px;
+    background-repeat: repeat;
+    background-position: center;
+    background-attachment: fixed;
+    
 }
